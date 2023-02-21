@@ -1,0 +1,10 @@
+com\es\ClusterTest.class
+com\es\test\TimeDemo.class
+com\es\EsApplicationTests.class
+com\es\FileTest.class
+com\es\esdbTest.class
+com\es\ShardTempTest.class
+com\es\sqlTest.class
+com\es\JobFullTextServiceTest.class
+com\es\test\MsearchTest.class
+com\es\ZkTest.class

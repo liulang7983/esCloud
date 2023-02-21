@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="0" passed="0">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Command line suite" duration-ms="1228" started-at="2022-12-16T01:19:49Z" finished-at="2022-12-16T01:19:50Z">
+    <groups>
+    </groups>
+    <test name="Command line test" duration-ms="1228" started-at="2022-12-16T01:19:49Z" finished-at="2022-12-16T01:19:50Z">
+      <class name="com.es.JobFullTextServiceTest">
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.es.JobFullTextServiceTest@14bf9759]" name="beforeTest" is-config="true" duration-ms="1221" started-at="2022-12-16T01:19:49Z" finished-at="2022-12-16T01:19:50Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+      </class> <!-- com.es.JobFullTextServiceTest -->
+    </test> <!-- Command line test -->
+  </suite> <!-- Command line suite -->
+</testng-results>
