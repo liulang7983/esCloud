@@ -30,7 +30,7 @@ public class IndexController {
         return s;
     }
     @PostMapping("/index5")
-    public String index4(HttpServletRequest request){
+    public String index5(HttpServletRequest request){
         System.out.println("TestController");
         String s = request.getHeader("s");
         return s;
@@ -49,6 +49,12 @@ public class IndexController {
     }
     @PostMapping("/index4")
     public String index4(HttpServletRequest request){
+        System.out.println("TestController");
+        String s = request.getHeader("s");
+        return s;
+    }
+    @PostMapping("/index11")
+    public String index11(HttpServletRequest request){
         System.out.println("TestController");
         String s = request.getHeader("s");
         return s;
