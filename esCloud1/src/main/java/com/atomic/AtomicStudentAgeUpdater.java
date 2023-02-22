@@ -38,6 +38,7 @@ public class AtomicStudentAgeUpdater {
 
     static {
         try {
+            System.out.println("我是es66");
             valueOffset = unsafe.objectFieldOffset(AtomicStudentAgeUpdater.class.getDeclaredField("age"));
             System.out.println("valueOffset:--->"+valueOffset);
         } catch (Exception e) {

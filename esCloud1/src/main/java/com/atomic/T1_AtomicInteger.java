@@ -17,7 +17,7 @@ public class T1_AtomicInteger {
 
     public static void main(String[] args) throws InterruptedException {
         CountDownLatch countDownLatch = new CountDownLatch(10);
-
+        System.out.println("我是es66");
         for(int i=0;i<10;i++){
             new Thread(()->{
                 for(int j=0;j<1000;j++){
