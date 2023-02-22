@@ -32,5 +32,7 @@ public class ThreadVisibility {
             refresh();
         }, "ThreadB");
         threadB.start();
+
+        System.out.println("es67-2");
     }
 }
