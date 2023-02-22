@@ -17,7 +17,7 @@ public class AtomicReferenceFieldUpdaterRunner {
 
     public static void main(String[] args) {
         Document document = new Document("杨过",1);
-
+        System.out.println("我是es66");
         System.out.println(atomic.get(document));
 
         atomic.getAndSet(document,"xiaolongnv");

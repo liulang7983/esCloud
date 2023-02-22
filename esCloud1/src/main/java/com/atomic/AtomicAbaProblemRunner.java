@@ -17,6 +17,7 @@ public class AtomicAbaProblemRunner {
     static AtomicInteger atomicInteger = new AtomicInteger(1);
 
     public static void main(String[] args) {
+        System.out.println("我是es66");
         Thread main = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -39,6 +40,7 @@ public class AtomicAbaProblemRunner {
         Thread other = new Thread(new Runnable() {
             @Override
             public void run() {
+                System.out.println("我是es66");
                 atomicInteger.incrementAndGet();// 1+1 = 2;
                 log.info("操作线程"+Thread.currentThread().getName()+"--increase后值:"+atomicInteger.get());
                 atomicInteger.decrementAndGet();// atomic-1 = 2-1;

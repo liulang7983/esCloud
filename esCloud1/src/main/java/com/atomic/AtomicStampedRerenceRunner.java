@@ -18,6 +18,7 @@ public class AtomicStampedRerenceRunner {
 
     public static void main(String[] args){
         Thread main = new Thread(() -> {
+            System.out.println("我是es66");
             int stamp = atomicStampedRef.getStamp(); //获取当前标识别
             System.out.println("操作线程" + Thread.currentThread()+ "stamp="+stamp + ",初始值 a = " + atomicStampedRef.getReference());
             try {

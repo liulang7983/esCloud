@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class test {
     public static void main(String[] args) throws InterruptedException {
+        System.out.println("我是es66");
         TimeUnit.SECONDS.sleep(5);
         Object object = new Object();
         System.out.println(ClassLayout.parseInstance(object).toPrintable());

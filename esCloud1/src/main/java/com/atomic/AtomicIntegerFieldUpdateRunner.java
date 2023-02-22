@@ -15,6 +15,7 @@ public class AtomicIntegerFieldUpdateRunner {
     static AtomicIntegerFieldUpdater aifu = AtomicIntegerFieldUpdater.newUpdater(Student.class,"old");
 
     public static void main(String[] args) {
+        System.out.println("我是es66");
         Student stu = new Student("杨过",18);
         System.out.println(aifu.getAndIncrement(stu));
         System.out.println(aifu.getAndIncrement(stu));
