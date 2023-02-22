@@ -17,4 +17,11 @@ public class TestController {
         String s = request.getHeader("s");
         return s;
     }
+
+    @PostMapping("/t4")
+    public String t4(HttpServletRequest request){
+        String s = request.getHeader("s");
+        System.out.println("我是es67");
+        return s;
+    }
 }

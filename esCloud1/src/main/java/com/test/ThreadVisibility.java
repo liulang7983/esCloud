@@ -14,6 +14,7 @@ public class ThreadVisibility {
     }
 
     public static void main(String[] args) {
+        System.out.println("我是es67");
         Thread threadA = new Thread(() -> {
             while (!initFlag){
                 System.out.println("打印");
