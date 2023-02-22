@@ -35,6 +35,7 @@ public class Juc01_Thread_LockSupport {
         t0.start();
 
         try {
+            System.out.println("我是es67");
             Thread.sleep(5000);
             log.info("准备唤醒{}线程!",t0.getName());
             LockSupport.unpark(t0);

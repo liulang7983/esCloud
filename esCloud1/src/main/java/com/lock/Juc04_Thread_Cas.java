@@ -33,6 +33,7 @@ public class Juc04_Thread_Cas {
     private static Juc04_Thread_Cas cas = new Juc04_Thread_Cas();
 
     public static void main(String[] args) {
+        System.out.println("我是es67");
         new Thread(new Worker(),"t-0").start();
         new Thread(new Worker(),"t-1").start();
         new Thread(new Worker(),"t-2").start();

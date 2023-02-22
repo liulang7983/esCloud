@@ -18,7 +18,7 @@ public class AtomicReferenceArrayRunner {
         System.out.println(objarray.get(0).getSequence());
 
         objarray.set(0,new Tuling(3));
-
+        System.out.println("我是es67");
         System.out.println(objarray.get(0).getSequence());
         System.out.println(ovalue[0].getSequence());
 

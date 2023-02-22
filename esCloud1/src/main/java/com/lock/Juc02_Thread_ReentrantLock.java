@@ -36,6 +36,7 @@ public class Juc02_Thread_ReentrantLock {
             log.info("Thread:{},第一次解锁",threadName);
         lock.unlock();
         log.info("Thread:{},第二次解锁",threadName);
+        System.out.println("我是es67");
     }
 
     public static void main(String[] args) {

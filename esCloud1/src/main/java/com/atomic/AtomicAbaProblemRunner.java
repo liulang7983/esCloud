@@ -48,6 +48,7 @@ public class AtomicAbaProblemRunner {
 
         main.start();
         try {
+            System.out.println("我是es67");
             Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();

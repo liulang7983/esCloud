@@ -19,6 +19,7 @@ public class AtomicIntegerFieldUpdateRunner {
         System.out.println(aifu.getAndIncrement(stu));
         System.out.println(aifu.getAndIncrement(stu));
         System.out.println(aifu.get(stu));
+        System.out.println("我是es67");
     }
 
     static class Student{

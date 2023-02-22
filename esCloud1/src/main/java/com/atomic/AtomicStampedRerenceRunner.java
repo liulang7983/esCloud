@@ -37,7 +37,7 @@ public class AtomicStampedRerenceRunner {
             atomicStampedRef.compareAndSet(2,1,stamp,stamp+1);
             System.out.println("操作线程" + Thread.currentThread() + "stamp="+atomicStampedRef.getStamp() +",【decrement】 ,值 a= "+ atomicStampedRef.getReference());
         },"干扰线程");
-
+        System.out.println("我是es67");
         main.start();
         LockSupport.parkNanos(1000000);
         other.start();

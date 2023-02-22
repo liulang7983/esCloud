@@ -28,7 +28,7 @@ public class AtomicStudentAgeUpdater {
         AtomicStudentAgeUpdater updater = new AtomicStudentAgeUpdater("杨过",18);
 
         System.out.println(ClassLayout.parseInstance(updater).toPrintable());
-
+        System.out.println("我是es67");
         updater.compareAndSwapAge(18,56);
         System.out.println("真实的杨过年龄---"+updater.getAge());
     }

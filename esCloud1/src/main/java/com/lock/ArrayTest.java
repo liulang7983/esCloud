@@ -9,5 +9,6 @@ import java.util.concurrent.ArrayBlockingQueue;
 public class ArrayTest {
     public static void main(String[] args) {
         //ArrayBlockingQueue queue = new ArrayBlockingQueue<2>();
+        System.out.println("我是es67");
     }
 }

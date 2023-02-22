@@ -23,7 +23,7 @@ public class AtomicReferenceFieldUpdaterRunner {
         atomic.getAndSet(document,"xiaolongnv");
 
         System.out.println(atomic.get(document));
-
+        System.out.println("我是es67");
         //另一种方式修改
         UnaryOperator<String> uo = s->{
             System.out.println("UnaryOperator:-->"+s);
