@@ -42,4 +42,11 @@ public class JobFullController {
         System.out.println("我是es67");
         return s;
     }
+
+    @PostMapping("/t2")
+    public String t2(HttpServletRequest request){
+        System.out.println("我是es66");
+        String s = request.getHeader("s");
+        return s;
+    }
 }
