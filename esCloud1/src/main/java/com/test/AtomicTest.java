@@ -24,5 +24,6 @@ public class AtomicTest {
             e.printStackTrace();
         }
         System.out.println(counter);
+        System.out.println("我是es67");
     }
 }

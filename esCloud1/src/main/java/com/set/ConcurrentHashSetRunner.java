@@ -18,6 +18,7 @@ public class ConcurrentHashSetRunner {
         copyOnWriteArraySet.add(nextInt);
 
         System.out.println(copyOnWriteArraySet.contains(nextInt));
+        System.out.println("我是es67");
     }
 
 }
