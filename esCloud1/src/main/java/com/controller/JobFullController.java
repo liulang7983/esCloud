@@ -15,6 +15,15 @@ public class JobFullController {
 
     @PostMapping("/test")
     public String test(HttpServletRequest request){
+        System.out.println("我是es66");
+        String s = request.getHeader("s");
+        return s;
+    }
+
+
+    @PostMapping("/test1")
+    public String test1(HttpServletRequest request){
+        System.out.println("我是es66");
         String s = request.getHeader("s");
         return s;
     }
