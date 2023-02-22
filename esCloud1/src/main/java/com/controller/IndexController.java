@@ -23,6 +23,12 @@ public class IndexController {
         String s = request.getHeader("s");
         return s;
     }
+    @PostMapping("/index12")
+    public String index12(HttpServletRequest request){
+        System.out.println("TestController");
+        String s = request.getHeader("s");
+        return s;
+    }
     @PostMapping("/index4")
     public String index4(HttpServletRequest request){
         System.out.println("TestController");
