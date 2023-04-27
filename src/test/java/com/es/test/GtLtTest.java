@@ -1,5 +1,7 @@
 package com.es.test;
 
+import com.alibaba.fastjson2.JSONObject;
+import com.bean.EsDb;
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
@@ -10,6 +12,7 @@ import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.index.query.RegexpQueryBuilder;
+import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.junit.jupiter.api.Test;
 
@@ -25,12 +28,22 @@ public class GtLtTest {
         //年龄小于20的
         //RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery("age").lt(20);
         //年龄大于20的
-        RangeQueryBuilder rangeQueryBuilder= QueryBuilders.rangeQuery("age").gt(20);
-        SearchRequest request = new SearchRequest("test");
+        //RangeQueryBuilder rangeQueryBuilder= QueryBuilders.rangeQuery("age").gt(20);
+        //年龄大于等于21的
+        RangeQueryBuilder rangeQueryBuilder= QueryBuilders.rangeQuery("age").gte(21);
+        SearchRequest request = new SearchRequest("es_db");
+        builder.size(1000);
         builder.query(rangeQueryBuilder);
         request.source(builder);
         System.out.println(builder.toString());
         SearchResponse search = client.search(request, RequestOptions.DEFAULT);
+        SearchHit[] hits = search.getHits().getHits();
+        for (SearchHit hit:hits){
+            String sourceAsString = hit.getSourceAsString();
+            EsDb esDb = JSONObject.parseObject(sourceAsString, EsDb.class);
+            esDb.setId(hit.getId());
+            System.out.println(esDb);
+        }
         long value = search.getHits().getTotalHits().value;
         System.out.println("value:"+value);
     }

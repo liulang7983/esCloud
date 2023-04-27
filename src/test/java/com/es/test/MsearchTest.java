@@ -28,9 +28,9 @@ public class MsearchTest {
 
     public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9200)));
     public static String ES_DB="es_db";
-    /** 
+    /**
      * 原始的一条语句多个聚合
-     */ 
+     */
     @Test
     public void test1()throws IOException {
         SearchRequest request = new SearchRequest(ES_DB);
@@ -42,6 +42,7 @@ public class MsearchTest {
         Map<String, Aggregation> asMap = search.getAggregations().asMap();
         String[] aggStr=new String[]{"ageagg","nameagg"};
         for (String s:aggStr) {
+            System.out.println(s);
             Terms terms=(Terms) asMap.get(s);
             Iterator<? extends Terms.Bucket> iterator = terms.getBuckets().iterator();
             while (iterator.hasNext()){

@@ -12,6 +12,7 @@ import org.elasticsearch.action.admin.indices.open.OpenIndexRequest;
 import org.elasticsearch.action.admin.indices.open.OpenIndexResponse;
 import org.elasticsearch.action.admin.indices.settings.get.GetSettingsRequest;
 import org.elasticsearch.action.admin.indices.settings.get.GetSettingsResponse;
+import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.client.*;
 import org.elasticsearch.client.enrich.StatsRequest;
@@ -38,6 +39,9 @@ import java.util.Set;
  */
 public class ClusterTest {
     public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9200)));
+    /**
+     * 打印集群中索引的各项信息
+     */
     @Test
     public void status ()throws IOException {{
         Response response = client.getLowLevelClient().performRequest(new Request("GET", "/_cat/indices"));
@@ -61,17 +65,8 @@ public class ClusterTest {
             String deletedDocNum = infoArr[7];
             String allShardSize = infoArr[8];
             String mainShardSize = infoArr[9];
-            System.out.println("》》》》》》》》索引信息》》》》》》》》");
-            System.out.println("名称：" + name);
-            System.out.println("id：" + id);
-            System.out.println("状态：" + status);
-            System.out.println("是否开放：" + open);
-            System.out.println("主分片数量：" + mainShardNum);
-            System.out.println("副本分片数量：" + viceShardNum);
-            System.out.println("Lucene文档数量：" + docNum);
-            System.out.println("被删除文档数量：" + deletedDocNum);
-            System.out.println("所有分片大小：" + allShardSize);
-            System.out.println("主分片大小：" + mainShardSize);
+            System.out.println("名称：" + name+"   id：" + id+" 状态：" + status+"   是否开放：" + open+"   主分片数量：" + mainShardNum+"   副本分片数量：" + viceShardNum+"   Lucene文档数量：" + docNum
+            +"   被删除文档数量：" + deletedDocNum+"   所有分片大小：" + allShardSize+"   主分片大小：" + mainShardSize);
         }
         // 6、关闭ES客户端对象
         }
@@ -114,6 +109,7 @@ public class ClusterTest {
     }
     }
 
+    //获取所有的索引信息
     @Test
     public  void index() {
         try {
@@ -128,7 +124,7 @@ public class ClusterTest {
             e.printStackTrace();
         }
     }
-
+    //获取索引的分片数
     @Test
     public void setting ()throws IOException {
         GetSettingsRequest getSettings=new GetSettingsRequest().indices("job_idx_shard_temp");
@@ -138,7 +134,7 @@ public class ClusterTest {
         System.out.println(numberOfShardsString);
 
     }
-
+    //关闭索引
     @Test
     public void close ()throws IOException {
         CloseIndexRequest closeIndexRequest = new CloseIndexRequest(("job_idx_shard_temp"));
@@ -147,12 +143,12 @@ public class ClusterTest {
 
     }
 
+    //打开索引
     @Test
-    public void update ()throws IOException {
-        OpenIndexRequest request=new OpenIndexRequest("job_idx_shard_temp");
-        OpenIndexResponse open = client.indices().open(request, RequestOptions.DEFAULT);
-        boolean acknowledged = open.isAcknowledged();
-        System.out.println("acknowledged:"+acknowledged);
-    }
+    public void open ()throws IOException {
+        OpenIndexRequest openIndexRequest = new OpenIndexRequest("job_idx_shard_temp");
+        OpenIndexResponse open = client.indices().open(openIndexRequest, RequestOptions.DEFAULT);
+        System.out.println(open.isAcknowledged());
 
+    }
 }
