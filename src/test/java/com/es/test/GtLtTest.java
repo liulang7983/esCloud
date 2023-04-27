@@ -24,6 +24,7 @@ public class GtLtTest {
         SearchSourceBuilder builder = new SearchSourceBuilder();
         //年龄小于20的
         //RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery("age").lt(20);
+        //年龄大于20的
         RangeQueryBuilder rangeQueryBuilder= QueryBuilders.rangeQuery("age").gt(20);
         SearchRequest request = new SearchRequest("test");
         builder.query(rangeQueryBuilder);

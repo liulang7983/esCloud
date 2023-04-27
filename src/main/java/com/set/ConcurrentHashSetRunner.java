@@ -3,13 +3,6 @@ package com.set;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-/**
- * @author ：杨过
- * @date ：Created in 2020/8/23
- * @version: V1.0
- * @slogan: 天下风云出我辈，一入代码岁月催
- * @description:
- **/
 public class ConcurrentHashSetRunner {
 
     public static void main(String[] args) {
@@ -19,5 +12,4 @@ public class ConcurrentHashSetRunner {
 
         System.out.println(copyOnWriteArraySet.contains(nextInt));
     }
-
 }
