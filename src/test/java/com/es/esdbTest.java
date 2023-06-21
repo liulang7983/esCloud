@@ -43,11 +43,9 @@ public class esdbTest {
         GetRequest getRequest = new GetRequest(ES_DB,"1");
         GetResponse response = client.get(getRequest, RequestOptions.DEFAULT);
         String sourceAsString = response.getSourceAsString();
-        System.out.println(sourceAsString);
         EsDb esDb = JSONObject.parseObject(sourceAsString, EsDb.class);
         esDb.setId(response.getId());
         System.out.println(esDb);
-
     }
 
     @Test
@@ -123,7 +121,6 @@ public class esdbTest {
             esDb.setId(hit.getId());
             System.out.println(esDb);
             System.out.println("----------------------");
-
         }
     }
 
@@ -196,6 +193,7 @@ public class esdbTest {
         BoolQueryBuilder builder1 = QueryBuilders.boolQuery();
         BoolQueryBuilder builder2 = QueryBuilders.boolQuery();
         BoolQueryBuilder builder3 = QueryBuilders.boolQuery();
+        //查询remark同时含有java和developer的doc
         builder1.must(QueryBuilders.termQuery("remark","java"));
         builder2.must(QueryBuilders.termQuery("remark","developer"));
         builder.must(builder1);
@@ -227,7 +225,7 @@ public class esdbTest {
         builder3.must(QueryBuilders.termQuery("remark","the"));
         builder.must(builder1);
         builder.must(builder2);
-        builder.must(builder3);
+        //builder.must(builder3);
         sourceBuilder.query(builder);
         request.source(sourceBuilder);
         SearchResponse search = client.search(request, RequestOptions.DEFAULT);
@@ -266,6 +264,7 @@ public class esdbTest {
     @Test
     public  void exists() throws IOException {
         GetRequest getRequest = new GetRequest(ES_DB,"1");
+        //是否存在id为1的
         boolean exists = client.exists(getRequest, RequestOptions.DEFAULT);
         System.out.println(exists);
     }
@@ -274,7 +273,9 @@ public class esdbTest {
         SearchRequest request = new SearchRequest(ES_DB);
         SearchSourceBuilder builder = new SearchSourceBuilder();
         BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
-        boolQuery.filter(QueryBuilders.termQuery("remark","张三丰"));
+        //使用filter查询remark含有张三丰的,remark字段为text类型，那么termQuery和matchQuery效果一样，都为模糊查询
+        //boolQuery.filter(QueryBuilders.termQuery("remark","张三丰"));
+        boolQuery.filter(QueryBuilders.matchQuery("remark","张三丰"));
         builder.query(boolQuery);
         request.source(builder);
         SearchResponse search = client.search(request, RequestOptions.DEFAULT);
@@ -293,6 +294,7 @@ public class esdbTest {
         SearchRequest request = new SearchRequest(ES_DB);
         SearchSourceBuilder builder = new SearchSourceBuilder();
         RangeQueryBuilder age = QueryBuilders.rangeQuery("age");
+        //查询年龄20<=age<=25之间的
         age.gte("20");
         age.lte("25");
         builder.query(age);
@@ -312,6 +314,7 @@ public class esdbTest {
     public void queryString()throws IOException{
         SearchRequest request = new SearchRequest(ES_DB);
         SearchSourceBuilder builder = new SearchSourceBuilder();
+        //查询所有字段含有张三的doc
         QueryStringQueryBuilder query = QueryBuilders.queryStringQuery("张三");
         builder.query(query);
         request.source(builder);

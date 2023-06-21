@@ -44,12 +44,10 @@ public class ClusterTest {
      */
     @Test
     public void status ()throws IOException {{
-        Response response = client.getLowLevelClient().performRequest(new Request("GET", "/_cat/indices"));
+        Response response = client.getLowLevelClient().performRequest(new Request("GET", "/_cat/indices?h=health,status,index"));
         // 3、数据处理
         HttpEntity entity = response.getEntity();
-        System.out.println("打印:entity:"+entity);
         String responseStr = EntityUtils.toString(entity, StandardCharsets.UTF_8);
-        System.out.println(responseStr);
         // 4、数据分解
         String[] indexInfoArr = responseStr.split("\n");
         for (String indexInfo : indexInfoArr) {
@@ -58,15 +56,7 @@ public class ClusterTest {
             String status = infoArr[0];
             String open = infoArr[1];
             String name = infoArr[2];
-            String id = infoArr[3];
-            String mainShardNum = infoArr[4];
-            String viceShardNum = infoArr[5];
-            String docNum = infoArr[6];
-            String deletedDocNum = infoArr[7];
-            String allShardSize = infoArr[8];
-            String mainShardSize = infoArr[9];
-            System.out.println("名称：" + name+"   id：" + id+" 状态：" + status+"   是否开放：" + open+"   主分片数量：" + mainShardNum+"   副本分片数量：" + viceShardNum+"   Lucene文档数量：" + docNum
-            +"   被删除文档数量：" + deletedDocNum+"   所有分片大小：" + allShardSize+"   主分片大小：" + mainShardSize);
+            System.out.println("名称：" + name+"   状态："+status+"   是否打开："+open );
         }
         // 6、关闭ES客户端对象
         }
@@ -96,13 +86,12 @@ public class ClusterTest {
             System.out.println(iterator.hasNext());
             while (iterator.hasNext()){
                 String next = iterator.next();
-                System.out.println(next+":"+mappings.get(next));
                 MappingMetaData mappingMetaData = mappings.get(next);
                 Map<String, Object> sourceAsMap = mappingMetaData.getSourceAsMap();
+                System.out.println("属性");
                 Object properties = sourceAsMap.get("properties");
                 System.out.println(properties);
             }
-
             System.out.println("==================");
         }
         // 6、关闭ES客户端对象
