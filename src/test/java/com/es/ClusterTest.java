@@ -124,14 +124,15 @@ public class ClusterTest {
             e.printStackTrace();
         }
     }
-    //获取索引的分片数
+    //获取索引的分片数和副本分片数
     @Test
     public void setting ()throws IOException {
         GetSettingsRequest getSettings=new GetSettingsRequest().indices("job_idx_shard_temp");
         GetSettingsResponse getSettingsResponse=client.indices().getSettings(getSettings, RequestOptions.DEFAULT);
-
         String numberOfShardsString = getSettingsResponse.getSetting("job_idx_shard_temp", "index.number_of_shards");
-        System.out.println(numberOfShardsString);
+        System.out.println("分片数:"+numberOfShardsString);
+        final String numberOfReplicasString = getSettingsResponse.getSetting("job_idx_shard_temp", "index.number_of_replicas");
+        System.out.println("副本分片数:"+numberOfReplicasString);
 
     }
     //关闭索引

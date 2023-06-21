@@ -22,9 +22,9 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.client.indices.GetIndexRequest;
+import org.elasticsearch.client.indices.GetIndexResponse;
 import org.elasticsearch.common.text.Text;
 import org.elasticsearch.common.unit.TimeValue;
-
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
@@ -40,7 +40,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -58,7 +57,7 @@ public  class EsApplicationTests {
     void createIndex() throws Exception {
         CreateIndexRequest request = new CreateIndexRequest("myindex");
         CreateIndexResponse response = client.indices().create(request, RequestOptions.DEFAULT);
-        System.out.println(response);
+        System.out.println(response.isAcknowledged());
     }
 
     /**
@@ -110,7 +109,7 @@ public  class EsApplicationTests {
     }
 
     /**
-     * 获取文档
+     * 获取文档,貌似无法获取内容
      */
     @Test
     void getDoc() throws Exception {
@@ -130,7 +129,7 @@ public  class EsApplicationTests {
         DeleteRequest request = new DeleteRequest("myindex", "111");
         request.timeout("2s");
         DeleteResponse response = client.delete(request, RequestOptions.DEFAULT);
-        System.out.println(response);
+        System.out.println(response.status());
     }
 
     /**
@@ -144,7 +143,7 @@ public  class EsApplicationTests {
         Student student = new Student("111", "张四", 44, "444555666");
         request.doc(JSON.toJSONString(student), XContentType.JSON);
         UpdateResponse response = client.update(request, RequestOptions.DEFAULT);
-        System.out.println(response);
+        System.out.println(response.status());
     }
 
     /**
@@ -183,7 +182,7 @@ public  class EsApplicationTests {
 //		}
 
         BulkResponse response = client.bulk(request, RequestOptions.DEFAULT);
-        System.out.println(response);
+        System.out.println(response.status());
     }
 
     /**

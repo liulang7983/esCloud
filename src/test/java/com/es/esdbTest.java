@@ -43,6 +43,7 @@ public class esdbTest {
         GetRequest getRequest = new GetRequest(ES_DB,"1");
         GetResponse response = client.get(getRequest, RequestOptions.DEFAULT);
         String sourceAsString = response.getSourceAsString();
+        System.out.println(sourceAsString);
         EsDb esDb = JSONObject.parseObject(sourceAsString, EsDb.class);
         esDb.setId(response.getId());
         System.out.println(esDb);
@@ -52,6 +53,9 @@ public class esdbTest {
     @Test
     public void  getSearch() throws IOException {
         SearchRequest request = new SearchRequest(ES_DB);
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+        sourceBuilder.size(100);
+        request.source(sourceBuilder);
         SearchResponse search = client.search(request, RequestOptions.DEFAULT);
         SearchHit[] hits = search.getHits().getHits();
         for (int i = 0; i <hits.length ; i++) {
@@ -66,6 +70,7 @@ public class esdbTest {
     public void searchByKeywords() throws IOException {
         SearchRequest request = new SearchRequest(ES_DB);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        //查询name或者address带有张三的
         MultiMatchQueryBuilder builder = QueryBuilders.multiMatchQuery("张三", "name", "address");
         searchSourceBuilder.query(builder);
         request.source(searchSourceBuilder);
@@ -82,12 +87,12 @@ public class esdbTest {
     public  void searchByPage()throws  IOException{
         SearchRequest request = new SearchRequest(ES_DB);
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+        //查询name或者address带有张三的，且按照年龄从大到小排序取前两个
         MultiMatchQueryBuilder builder = QueryBuilders.multiMatchQuery("张三", "name", "address");
         sourceBuilder.query(builder);
         sourceBuilder.size(2);
         sourceBuilder.from(0);
         sourceBuilder.sort("age", SortOrder.DESC);
-        //sourceBuilder.s
         request.source(sourceBuilder);
         SearchResponse search = client.search(request, RequestOptions.DEFAULT);
 
@@ -106,6 +111,7 @@ public class esdbTest {
     public void SearchRequest()throws  IOException{
         SearchRequest request = new SearchRequest(ES_DB);
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+        //精准查询,name是张三的
         TermQueryBuilder builder = QueryBuilders.termQuery("name", "张三");
         sourceBuilder.query(builder);
         request.source(sourceBuilder);
@@ -143,6 +149,7 @@ public class esdbTest {
     public void SearchRequest2()throws  IOException{
         SearchRequest request = new SearchRequest(ES_DB);
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+        //name以张开头
         PrefixQueryBuilder builder = QueryBuilders.prefixQuery("name", "张");
         //MultiMatchQueryBuilder builder = QueryBuilders.multiMatchQuery("张三", "name","address");
         sourceBuilder.query(builder);
@@ -162,10 +169,12 @@ public class esdbTest {
     public  void operatorSearch() throws IOException {
         SearchRequest request = new SearchRequest(ES_DB);
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+        //模糊查询remark带有java的doc
         MatchQueryBuilder builder = QueryBuilders.matchQuery("remark", "java");
 
         //builder.queryName("java");
         sourceBuilder.query(builder);
+        sourceBuilder.size(100);
         request.source(sourceBuilder);
         SearchResponse search = client.search(request, RequestOptions.DEFAULT);
         SearchHit[] hits = search.getHits().getHits();
