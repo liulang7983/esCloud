@@ -6,11 +6,13 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author ming.li
  * @date 2022/11/1 9:21
  */
+@EnableScheduling
 @SpringBootApplication
 public class ESCloud1Main {
     public static void main(String[] args) {
