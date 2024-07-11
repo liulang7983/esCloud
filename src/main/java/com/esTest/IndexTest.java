@@ -74,4 +74,21 @@ public class IndexTest {
             e.printStackTrace();
         }
     }
+
+    //查询前缀为esb的索引
+    @Test
+    public void test4() {
+        try {
+            GetIndexRequest getIndexRequest = new GetIndexRequest("*04-19-16*");
+            GetIndexResponse indexResponse = client.indices().get(getIndexRequest, RequestOptions.DEFAULT);
+            Map<String, List<AliasMetaData>> aliases = indexResponse.getAliases();
+            aliases.get("s");
+            String[] indices = indexResponse.getIndices();
+            for (String s : indices) {
+                System.out.println(s);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

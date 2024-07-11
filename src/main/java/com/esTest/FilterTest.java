@@ -21,7 +21,7 @@ import java.io.IOException;
  * @date 2023/11/15 15:39
  */
 public class FilterTest {
-    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("172.18.26.20",9200)));
+    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9200)));
     private static String ES_DB="es_db";
 
     //bool查询name的值是张三的，address的值含有公园的(同时满足)
@@ -30,7 +30,8 @@ public class FilterTest {
         SearchRequest request = new SearchRequest(ES_DB);
         SearchSourceBuilder builder = new SearchSourceBuilder();
         BoolQueryBuilder query = QueryBuilders.boolQuery();
-        query.filter(QueryBuilders.termQuery("name","张三"));
+        //张三用模糊查询matchQuery可以查到，用精准查询termQuery查不到
+        query.filter(QueryBuilders.matchQuery("name","张三"));
         query.filter(QueryBuilders.matchQuery("address","公园"));
         builder.query(query);
         request.source(builder);

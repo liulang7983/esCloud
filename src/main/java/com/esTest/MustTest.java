@@ -21,16 +21,37 @@ import java.io.IOException;
  * @date 2023/11/15 15:50
  */
 public class MustTest {
-    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("172.18.26.20",9200)));
+    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9200)));
     private static String ES_DB="es_db";
-    //bool查询name的值是张三的，address的值含有广州的(同时满足)
+    //bool查询name的值是张三的，address的值含有广州的(同时满足)--name类型是text无法term查询
     @Test
     public void test1() throws IOException {
         SearchRequest request = new SearchRequest(ES_DB);
         SearchSourceBuilder builder = new SearchSourceBuilder();
         BoolQueryBuilder query = QueryBuilders.boolQuery();
-        query.must(QueryBuilders.termQuery("name","张三"));
+        //query.must(QueryBuilders.termQuery("name","张三"));
+        query.must(QueryBuilders.matchQuery("name","张三"));
         query.must(QueryBuilders.matchQuery("address","广州"));
+        //query.must(QueryBuilders.termQuery("age",99));
+        builder.query(query);
+        request.source(builder);
+        SearchResponse search = client.search(request, RequestOptions.DEFAULT);
+        SearchHit[] hits = search.getHits().getHits();
+        for (int i = 0; i < hits.length; i++) {
+            SearchHit hit = hits[i];
+            EsDb esDb = JSONObject.parseObject(hit.getSourceAsString(), EsDb.class);
+            System.out.println(esDb);
+        }
+    }
+
+    @Test
+    public void test2() throws IOException {
+        SearchRequest request = new SearchRequest(ES_DB);
+        SearchSourceBuilder builder = new SearchSourceBuilder();
+        BoolQueryBuilder query = QueryBuilders.boolQuery();
+        //query.must(QueryBuilders.termQuery("name","张三"));
+        query.must(QueryBuilders.matchQuery("name","张三"));
+        query.must(QueryBuilders.matchQuery("address","公园"));
         //query.must(QueryBuilders.termQuery("age",99));
         builder.query(query);
         request.source(builder);

@@ -22,7 +22,7 @@ import java.io.IOException;
  * @date 2023/11/15 14:19
  */
 public class MatchTest {
-    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("172.18.26.20",9200)));
+    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9200)));
     private static String ES_DB="es_db";
 
     //match默认或查询索引中address字段含有广州公园的值

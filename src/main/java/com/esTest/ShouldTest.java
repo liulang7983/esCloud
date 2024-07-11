@@ -21,7 +21,7 @@ import java.io.IOException;
  * @date 2023/11/15 15:50
  */
 public class ShouldTest {
-    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("172.18.26.20",9200)));
+    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9200)));
     private static String ES_DB="es_db";
     //bool查询name的值是张三的，address的值含有公园的,age是99的(满足一个即可)
     @Test
@@ -29,7 +29,8 @@ public class ShouldTest {
         SearchRequest request = new SearchRequest(ES_DB);
         SearchSourceBuilder builder = new SearchSourceBuilder();
         BoolQueryBuilder query = QueryBuilders.boolQuery();
-        query.should(QueryBuilders.termQuery("name","张三"));
+        //张三用matchQuery可以查到，用termQuery查不到
+        query.should(QueryBuilders.matchQuery("name","张三"));
         query.should(QueryBuilders.matchQuery("address","白云"));
         query.should(QueryBuilders.termQuery("age",99));
         builder.query(query);

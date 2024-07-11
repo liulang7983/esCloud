@@ -22,7 +22,7 @@ import java.io.IOException;
  * @date 2023/11/15 14:47
  */
 public class QueryStringTest {
-    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("172.18.26.20",9200)));
+    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9200)));
     private static String ES_DB="es_db";
     //查询所有字段在含有张三的数据
     @Test

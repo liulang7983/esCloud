@@ -22,7 +22,7 @@ import java.io.IOException;
  * @date 2023/11/15 14:39
  */
 public class MultiMatchTest {
-    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("172.18.26.20",9200)));
+    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9200)));
     private static String ES_DB="es_db";
     //multiMatch默认或查询索引中address或name字段含有张三的值
     @Test
@@ -41,11 +41,12 @@ public class MultiMatchTest {
         }
     }
     //multiMatch与查询索引中address或name字段含有广州张三的值(此时查不到，应该是需要address或者name同时含有广州张三，而不是一个在address，一个在name中)
+    //长沙张三可以，有一个数据address是'广长沙岳麓山张三'
     @Test
     public void test2() throws IOException {
         SearchRequest request = new SearchRequest(ES_DB);
         SearchSourceBuilder builder = new SearchSourceBuilder();
-        MultiMatchQueryBuilder query = QueryBuilders.multiMatchQuery("广州张三", "address", "name").operator(Operator.AND);
+        MultiMatchQueryBuilder query = QueryBuilders.multiMatchQuery("长沙张三", "address", "name").operator(Operator.AND);
         builder.query(query);
         request.source(builder);
         SearchResponse search = client.search(request, RequestOptions.DEFAULT);

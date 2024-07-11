@@ -21,7 +21,7 @@ import java.io.IOException;
  * @date 2023/11/15 14:55
  */
 public class RangeTest {
-    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("172.18.26.20",9200)));
+    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9200)));
     private static String ES_DB="es_db";
 
     //range查询age在19-26之间的值(包含)
@@ -30,7 +30,6 @@ public class RangeTest {
         SearchRequest request = new SearchRequest(ES_DB);
         SearchSourceBuilder builder = new SearchSourceBuilder();
         RangeQueryBuilder query = QueryBuilders.rangeQuery("age").from(19).to(26);
-
         builder.query(query);
         request.source(builder);
         SearchResponse search = client.search(request, RequestOptions.DEFAULT);
