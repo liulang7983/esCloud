@@ -12,6 +12,7 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.TermQueryBuilder;
+import org.elasticsearch.index.query.TermsQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.junit.Test;
@@ -42,7 +43,7 @@ public class TermTest {
             System.out.println(esDb);
         }
     }
-    //term查询name的值包含张三的
+    //match查询name的值包含张三的
     @Test
     public void test2() throws IOException {
         SearchRequest searchRequest = new SearchRequest(ES_DB);
@@ -53,6 +54,40 @@ public class TermTest {
         SearchResponse search = client.search(searchRequest, RequestOptions.DEFAULT);
         SearchHit[] hits = search.getHits().getHits();
         for (SearchHit hit:hits){
+            EsDb esDb = JSONObject.parseObject(hit.getSourceAsString(), EsDb.class);
+            System.out.println(esDb);
+        }
+    }
+    //term查询age的值是22的
+    @Test
+    public void test3() throws IOException {
+        SearchRequest request = new SearchRequest(ES_DB);
+        SearchSourceBuilder builder = new SearchSourceBuilder();
+        TermQueryBuilder query = QueryBuilders.termQuery("age", "22");
+        builder.query(query);
+        request.source(builder);
+        SearchResponse search = client.search(request, RequestOptions.DEFAULT);
+        SearchHit[] hits = search.getHits().getHits();
+        for (int i = 0; i < hits.length; i++) {
+            SearchHit hit = hits[i];
+            EsDb esDb = JSONObject.parseObject(hit.getSourceAsString(), EsDb.class);
+            System.out.println(esDb);
+        }
+    }
+
+    //terms查询age的值是22或99的
+    @Test
+    public void test4() throws IOException {
+        SearchRequest request = new SearchRequest(ES_DB);
+        SearchSourceBuilder builder = new SearchSourceBuilder();
+        TermsQueryBuilder query = QueryBuilders.termsQuery("age", "22", "99");
+        //TermQueryBuilder query = QueryBuilders.termsQuery("name", "张三");
+        builder.query(query);
+        request.source(builder);
+        SearchResponse search = client.search(request, RequestOptions.DEFAULT);
+        SearchHit[] hits = search.getHits().getHits();
+        for (int i = 0; i < hits.length; i++) {
+            SearchHit hit = hits[i];
             EsDb esDb = JSONObject.parseObject(hit.getSourceAsString(), EsDb.class);
             System.out.println(esDb);
         }

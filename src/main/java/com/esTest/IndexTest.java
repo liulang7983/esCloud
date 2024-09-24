@@ -1,9 +1,14 @@
 package com.esTest;
 
 import org.apache.http.HttpHost;
+import org.elasticsearch.action.admin.indices.open.OpenIndexRequest;
+import org.elasticsearch.action.admin.indices.open.OpenIndexResponse;
+import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.client.indices.CloseIndexRequest;
+import org.elasticsearch.client.indices.CloseIndexResponse;
 import org.elasticsearch.client.indices.GetIndexRequest;
 import org.elasticsearch.client.indices.GetIndexResponse;
 import org.elasticsearch.cluster.metadata.AliasMetaData;
@@ -90,5 +95,20 @@ public class IndexTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    //关闭索引
+    @Test
+    public void test5()throws IOException {
+        CloseIndexRequest request = new CloseIndexRequest("es_db");
+        CloseIndexResponse close = client.indices().close(request, RequestOptions.DEFAULT);
+        System.out.println(close.isAcknowledged());
+    }
+    //打开索引
+    @Test
+    public void t6()throws IOException {
+        OpenIndexRequest request = new OpenIndexRequest("es_db");
+        OpenIndexResponse close = client.indices().open(request, RequestOptions.DEFAULT);
+        System.out.println(close.isAcknowledged());
     }
 }
