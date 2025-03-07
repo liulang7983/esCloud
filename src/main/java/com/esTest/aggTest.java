@@ -31,7 +31,7 @@ import java.util.Map;
  * @date 2023/11/15 15:39
  */
 public class aggTest {
-    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9200)));
+    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9201)));
     private static String LM="lm";
 
     //求age字段所有出现的值，类似于distinct
@@ -85,5 +85,6 @@ public class aggTest {
 
         }
     }
+
 
 }
