@@ -21,7 +21,7 @@ import java.io.IOException;
  * @date 2023/11/15 14:55
  */
 public class RangeTest {
-    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9200)));
+    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9201)));
     private static String ES_DB="es_db";
 
     //range查询age在19-26之间的值(包含)

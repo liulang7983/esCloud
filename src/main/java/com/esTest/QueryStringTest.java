@@ -22,9 +22,9 @@ import java.io.IOException;
  * @date 2023/11/15 14:47
  */
 public class QueryStringTest {
-    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9200)));
+    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9201)));
     private static String ES_DB="es_db";
-    //查询所有字段在含有张三的数据
+    //查询所有字段在含有广州张三的数据
     @Test
     public void test1() throws IOException {
         SearchRequest request = new SearchRequest(ES_DB);

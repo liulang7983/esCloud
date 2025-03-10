@@ -17,7 +17,7 @@ import java.io.IOException;
  * @Version 1.0
  */
 public class TemplateTest {
-    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9200)));
+    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9201)));
     @Test
     public void test1() throws IOException {
         SearchRequest searchRequest=new SearchRequest("esb");

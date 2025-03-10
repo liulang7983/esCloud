@@ -21,7 +21,7 @@ import java.io.IOException;
  * @date 2023/11/15 15:50
  */
 public class MustTest {
-    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9200)));
+    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9201)));
     private static String ES_DB="es_db";
     //bool查询name的值是张三的，address的值含有广州的(同时满足)--name类型是text无法term查询
     @Test

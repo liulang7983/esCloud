@@ -21,7 +21,7 @@ import java.io.IOException;
  * @date 2023/11/15 15:50
  */
 public class ShouldTest {
-    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9200)));
+    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9201)));
     private static String ES_DB="es_db";
     //bool查询name的值是张三的，address的值含有公园的,age是99的(满足一个即可)
     @Test

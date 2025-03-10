@@ -22,7 +22,7 @@ import java.io.IOException;
  * @date 2023/11/15 14:39
  */
 public class MultiMatchTest {
-    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9200)));
+    public static RestHighLevelClient client=new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",9201)));
     private static String ES_DB="es_db";
     //multiMatch默认或查询索引中address或name字段含有张三的值
     @Test

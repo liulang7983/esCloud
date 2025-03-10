@@ -3,7 +3,6 @@ package com.esTest;
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.admin.indices.open.OpenIndexRequest;
 import org.elasticsearch.action.admin.indices.open.OpenIndexResponse;
-import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -106,7 +105,7 @@ public class IndexTest {
     }
     //打开索引
     @Test
-    public void t6()throws IOException {
+    public void test6()throws IOException {
         OpenIndexRequest request = new OpenIndexRequest("es_db");
         OpenIndexResponse close = client.indices().open(request, RequestOptions.DEFAULT);
         System.out.println(close.isAcknowledged());
